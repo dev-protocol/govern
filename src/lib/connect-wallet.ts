@@ -23,14 +23,10 @@ const providerOptions = {
 export const connectWallet = async (
 	_: unknown
 ): Promise<UndefinedOr<providers.Web3Provider>> => {
-	const web3ForInjected = await detectEthereumProvider()
 	const modalProvider = new Web3Modal({
 		providerOptions,
 	})
-	if (!web3ForInjected) {
-		modalProvider.clearCachedProvider()
-		return
-	}
+	modalProvider.clearCachedProvider()
 	const connectedProvider = await modalProvider.connect().catch(alwaysU)
 	const _provider = whenDefined(
 		connectedProvider,
