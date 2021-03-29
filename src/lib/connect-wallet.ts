@@ -25,8 +25,8 @@ export const connectWallet = async (
 ): Promise<UndefinedOr<providers.Web3Provider>> => {
 	const modalProvider = new Web3Modal({
 		providerOptions,
+		cacheProvider: false,
 	})
-	modalProvider.clearCachedProvider()
 	const connectedProvider = await modalProvider.connect().catch(alwaysU)
 	const _provider = whenDefined(
 		connectedProvider,

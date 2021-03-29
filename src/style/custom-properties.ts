@@ -16,9 +16,9 @@ export const properties = {
 	onSurfaceWeakColor: ['#a0a0a0'],
 	fontColor: ['#000', '#fff'],
 	fontSize: ['21px'],
-	fontFamilyHeading: ["'Montserrat', sans-serif"],
-	fontFamilyBody: ["'Poppins', sans-serif"],
-	fontFamilyUI: ["'Ubuntu', sans-serif"],
+	fontFamilyHeading: ["'WhyteInktrap', sans-serif"],
+	fontFamilyBody: ["'Whyte', sans-serif"],
+	fontFamilyUI: ["'Whyte', sans-serif"],
 	containerWidth: ['798px'],
 	borderRadius: ['3px'],
 }
