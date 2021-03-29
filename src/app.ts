@@ -1,7 +1,14 @@
 /* eslint-disable functional/no-expression-statement */
-import { component } from "@aggre/ullr"
-import { html, render } from "lit-html"
+import { render } from 'lit-html'
+import { app } from './component/page/home/app'
+import { rootStyle } from './style/presets'
 
-const app = document.getElementById('app')
+const createElementWhenUndefined = (name: string): HTMLElement =>
+	document.head.querySelector(name) ??
+	((t) => document.head.appendChild(t))(document.createElement(name))
 
-app && render(html`${component(html`<h1>App</h1>`)}`, app)
+const mount = document.getElementById('app')
+
+render(rootStyle, createElementWhenUndefined('style'))
+
+mount && render(app, mount)
