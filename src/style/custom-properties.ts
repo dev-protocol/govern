@@ -15,11 +15,11 @@ export const properties = {
 	weakColor: ['#ccc', '#505050'],
 	onSurfaceWeakColor: ['#a0a0a0'],
 	fontColor: ['#000', '#fff'],
-	fontSize: ['21px'],
+	fontSize: ['17px'],
 	fontFamilyHeading: ["'WhyteInktrap', sans-serif"],
 	fontFamilyBody: ["'Whyte', sans-serif"],
 	fontFamilyUI: ["'Whyte', sans-serif"],
-	containerWidth: ['798px'],
+	containerWidth: ['980px'],
 	borderRadius: ['3px'],
 }
 

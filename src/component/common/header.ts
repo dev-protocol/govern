@@ -4,6 +4,7 @@ import { until } from 'lit-html/directives/until'
 import { always } from 'ramda'
 import { provider, StoreProvider } from '../../store/provider'
 import { asVar } from '../../style/custom-properties'
+import { a } from './a'
 import { connect } from './button/connect'
 
 const connectButton = connect('Connect to a wallet')
@@ -38,6 +39,10 @@ export const header = always(html`
 			justify-content: space-between;
 			align-items: center;
 		}
+		a {
+			color: ${asVar('onSurfaceColor')};
+			text-decoration: none;
+		}
 		h1 {
 			margin: 0;
 			font-family: ${asVar('fontFamilyHeading')};
@@ -45,7 +50,7 @@ export const header = always(html`
 	</style>
 
 	<header>
-		<h1>Govern</h1>
+		<h1>${a({ href: '/', children: 'Govern' })}</h1>
 		${subscribe(provider, connectOrConnected)}
 	</header>
 `)
