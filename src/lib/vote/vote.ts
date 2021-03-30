@@ -6,7 +6,7 @@ import {
 
 type Options = {
 	readonly contract: Contract
-	readonly args: readonly [readonly string[], readonly number[]]
+	readonly args: readonly [readonly number[], readonly number[]]
 }
 
 export const vote = async ({

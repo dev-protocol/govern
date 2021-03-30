@@ -4,7 +4,7 @@ type Options = {
 	readonly contract: Contract
 }
 
-type Attributes = {
+export type Attributes = {
 	readonly subject: string
 	readonly body: string
 	readonly period: BigNumber

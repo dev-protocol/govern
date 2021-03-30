@@ -1,6 +1,7 @@
 import { component, subscribe } from '@aggre/ullr'
 import { html } from 'lit-html'
 import { route } from '../../store/route'
+import { footer } from '../common/footer'
 import { header } from '../common/header'
 import home from './home'
 import proposal from './proposal'
@@ -20,5 +21,6 @@ export default component(
 					? proposal(paths[0])
 					: home)(r.replace(/^\/(.*)/, '$1').split('/'))
 		)}
+		${footer()}
 	`
 )

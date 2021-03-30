@@ -8,8 +8,9 @@ export const container = (
 	component(html`
 		<style>
 			div {
-				width: ${asVar('containerWidth')};
+				max-width: ${asVar('containerWidth')};
 				margin: 0 auto;
+				padding: 0 1rem;
 			}
 		</style>
 		<div>${children}</div>
