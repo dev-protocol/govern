@@ -225,7 +225,7 @@
   dependencies:
     arrify "^1.0.1"
 
-"@devprotocol/util-ts@2.2.1":
+"@devprotocol/util-ts@2.2.1", "@devprotocol/util-ts@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@devprotocol/util-ts/-/util-ts-2.2.1.tgz#331b0c29b3837589bcb16f143afb9a51495238cc"
   integrity sha512-IadCVRL5hxxX2wvWZ/ErzpKOIIzZA/YHUWuGn6Ycg2PZ3Iq4asjtpezltQ2FmIBFciBVIl9E4E+1UMLrQbAMCg==
@@ -236,6 +236,15 @@
     ramda "^0.27.1"
     sinon "9.2.4"
     url-join "4.0.1"
+
+"@devprotocol/vote-count-resolver@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@devprotocol/vote-count-resolver/-/vote-count-resolver-0.1.4.tgz#428c0b434c8bc1c4a85960ae9cb69da12569c448"
+  integrity sha512-9LvX60NcdMHhC1WZVY7oH919oX85z3K8xz1hrdv4R2o+nZ0s8KxH2BtXk/OzDXZLLPHWmkIo6UHN5ownzaHkmQ==
+  dependencies:
+    "@devprotocol/util-ts" "^2.2.1"
+    "@openzeppelin/contracts" "3.4.1"
+    ramda "^0.27.1"
 
 "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
@@ -738,6 +747,11 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
+
+"@openzeppelin/contracts@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.4.1.tgz#03c891fec7f93be0ae44ed74e57a122a38732ce7"
+  integrity sha512-cUriqMauq1ylzP2TxePNdPqkwI7Le3Annh4K9rrpvKfSBB/bdW+Iu1ihBaTIABTAAJ85LmKL5SSPPL9ry8d1gQ==
 
 "@pedrouid/iso-crypto@^1.0.0":
   version "1.1.0"

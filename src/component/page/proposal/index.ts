@@ -11,6 +11,7 @@ import { container } from '../../common/container'
 import { results } from './results'
 import { vote } from './vote/vote'
 import { stats } from './stats'
+import { placeholder } from '../../common/placeholder'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -27,53 +28,64 @@ const dummy = {
 	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
 }
 
-export default (contractAddress: string): DirectiveFunction =>
-	container(
-		subscribe(
-			from(
-				attributes({
-					contract: createVoteContract(standloneProvider, contractAddress),
-				})
-					.catch(always(Promise.resolve(dummy)))
-					.then(parseAttributes)
-			),
-			(attributes) =>
-				component(html`
-					<style>
-						a {
-							color: ${asVar('primaryColor')};
-							text-decoration: none;
-						}
-						li {
-							padding: 1rem;
-						}
+export default (contractAddress: string): DirectiveFunction => {
+	const store = from(
+		attributes({
+			contract: createVoteContract(standloneProvider, contractAddress),
+		})
+			.catch(always(Promise.resolve(dummy)))
+			.then(parseAttributes)
+	)
+	return container(
+		component(
+			html` <style>
+					a {
+						color: ${asVar('primaryColor')};
+						text-decoration: none;
+					}
+					li {
+						padding: 1rem;
+					}
+					main {
+						display: grid;
+						grid-gap: 1rem;
+					}
+					.aside {
+						position: sticky;
+						top: 1rem;
+						display: grid;
+						grid-gap: 1rem;
+					}
+					@media (min-width: 920px) {
 						main {
-							display: grid;
-							grid-gap: 1rem;
+							grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
 						}
-						.aside {
-							position: sticky;
-							top: 1rem;
-							display: grid;
-							grid-gap: 1rem;
-						}
-						@media (min-width: 920px) {
-							main {
-								grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
-							}
-						}
-					</style>
-					<main>
-						<article>${markedHTML(attributes.body)}</article>
-						<aside>
-							<div class="aside">
-								${results(contractAddress, attributes.options)}${stats(
-									attributes
-								)}
-							</div>
-						</aside>
-						${vote(contractAddress, attributes.options)}
-					</main>
-				`)
+					}
+				</style>
+				<main>
+					${subscribe(
+						store,
+						(attributes) =>
+							html`
+								<article>${markedHTML(attributes.body)}</article>
+								${vote(contractAddress, attributes.options)}
+							`,
+						placeholder({ row: 6 })
+					)}
+					${subscribe(
+						store,
+						(attributes) =>
+							html`
+								<aside>
+									<div class="aside">
+										${results(contractAddress, attributes.options)}
+										${stats(attributes)}
+									</div>
+								</aside>
+							`,
+						placeholder()
+					)}
+				</main>`
 		)
 	)
+}

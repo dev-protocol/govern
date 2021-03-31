@@ -4,15 +4,27 @@ import { repeat } from 'lit-html/directives/repeat'
 import { from } from 'rxjs'
 import { findHeadings } from '../../../lib/parse-markdown'
 import { Attributes } from '../../../lib/vote/attributes'
-import { getVotes } from '../../../mock/@devprotocol/governance'
+import { getVotes } from '@devprotocol/vote-count-resolver'
 import { ul } from '../../../style/reset/ul'
 import { BigNumber, constants } from 'ethers'
 import { asVar } from '../../../style/custom-properties'
 import { asideHeading, asideContainer } from './styles'
+import { waitForNotNullable } from '../../../lib/wait-for-not-nullable'
+import { provider } from '../../../store/provider'
+import { switchMap } from 'rxjs/operators'
+import { getVotes as dummy } from '../../../mock/@devprotocol/governance'
+import { always } from 'ramda'
+import { standloneProvider } from '../../../lib/standalone-provider'
+import { placeholder } from '../../common/placeholder'
 
 const BASIS = 10000
-const calcShare = (num: BigNumber, total: BigNumber): number =>
-	num.mul(BASIS).div(total).mul(100).toNumber() / BASIS
+const calcShare = (
+	num: BigNumber | string,
+	total: BigNumber | string
+): number =>
+	BigNumber.from(num).mul(BASIS).div(total).mul(100).toNumber() / BASIS
+const de18ize = (num: BigNumber | string): number =>
+	BigNumber.from(num).mul(BASIS).div(constants.WeiPerEther).toNumber() / BASIS
 
 export const results = (
 	contractAddress: string,
@@ -41,37 +53,48 @@ export const results = (
 				background: ${asVar('primaryVariantColor')};
 			}
 		</style>
-		${subscribe(from(getVotes(contractAddress)), (data) => {
-			const total = data.reduce((p, x) => p.add(x.count), constants.Zero)
-			return html`
-				<section>
-					<header>Results</header>
-					<ul>
-						${repeat(options, (option, i) => {
-							const result = data[i]
-							const { count, counts } = result
-							const share = calcShare(count, total)
-							return (([heading]) => html`
-								<li>
-									<span>${heading} (${share}%)</span>
-									<div
-										role="progressbar"
-										aria-valuenow=${share}
-										aria-valuemin="0"
-										aria-valuemax="100"
-										max="100"
-									>
-										<span style="width: ${share}%" role="presentation"></span>
-									</div>
-									<span>#1 ${counts[0].toNumber()} votes</span>
-									<span>#2 ${counts[1].toNumber()} votes</span>
-									<span>#3 ${counts[2].toNumber()} votes</span>
-									<span>Borda Count ${count.toNumber()}</span>
-								</li>
-							`)(findHeadings(option))
-						})}
-					</ul>
-				</section>
-			`
-		})}
+		<section>
+			<header>Results</header>
+			<ul>
+				${subscribe(
+					from(
+						getVotes(contractAddress, standloneProvider).catch(always(dummy))
+					),
+					(data) => {
+						const total = data
+							.map(({ count }) => count)
+							.reduce(
+								(p, x) => BigNumber.from(p).add(BigNumber.from(x)),
+								constants.Zero
+							)
+						return html`
+							${repeat(options, (option, i) => {
+								const result = data[i]
+								const { count, counts } = result
+								const share = calcShare(count, total)
+								return (([heading]) => html`
+									<li>
+										<span>${heading} (${share}%)</span>
+										<div
+											role="progressbar"
+											aria-valuenow=${share}
+											aria-valuemin="0"
+											aria-valuemax="100"
+											max="100"
+										>
+											<span style="width: ${share}%" role="presentation"></span>
+										</div>
+										<span>#1 ${de18ize(counts[0])} votes</span>
+										<span>#2 ${de18ize(counts[1])} votes</span>
+										<span>#3 ${de18ize(counts[2])} votes</span>
+										<span>Borda Count ${de18ize(count)}</span>
+									</li>
+								`)(findHeadings(option))
+							})}
+						`
+					},
+					placeholder()
+				)}
+			</ul>
+		</section>
 	`)

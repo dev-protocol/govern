@@ -7,6 +7,7 @@ import { a } from '../../common/a'
 import { always } from 'ramda'
 import { asVar } from '../../../style/custom-properties'
 import { standloneProvider } from '../../../lib/standalone-provider'
+import { placeholder } from '../../common/placeholder'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -24,25 +25,26 @@ const dummy = {
 }
 
 export const proposal = (contractAddress: string): DirectiveFunction =>
-	subscribe(
-		from(
-			attributes({
-				contract: createVoteContract(standloneProvider, contractAddress),
-			})
-				.catch(always(Promise.resolve(dummy)))
-				.then(parseAttributes)
-		),
-		({ subject }) =>
-			component(html`
-				<style>
-					a {
-						color: ${asVar('primaryColor')};
-						text-decoration: none;
-					}
-					li {
-						padding: 1rem;
-					}
-				</style>
-				<li>${a({ href: `/${contractAddress}`, children: subject })}</li>
-			`)
-	)
+	component(html` <style>
+			a {
+				color: ${asVar('primaryColor')};
+				text-decoration: none;
+			}
+			li {
+				padding: 1rem;
+			}
+		</style>
+
+		<li>
+			${subscribe(
+				from(
+					attributes({
+						contract: createVoteContract(standloneProvider, contractAddress),
+					})
+						.catch(always(Promise.resolve(dummy)))
+						.then(parseAttributes)
+				),
+				({ subject }) => a({ href: `/${contractAddress}`, children: subject }),
+				placeholder({ row: 1 })
+			)}
+		</li>`)
