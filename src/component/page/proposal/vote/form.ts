@@ -44,6 +44,8 @@ export const form = (
 				text-align: center;
 				border: 1px solid ${asVar('fontColor')};
 				border-radius: ${asVar('borderRadius')};
+				background: ${asVar('surfaceColor')};
+				color: ${asVar('fontColor')};
 			}
 			h3 {
 				margin: 0;
