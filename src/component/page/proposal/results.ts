@@ -30,6 +30,7 @@ export const results = (
 			}
 			[role='progressbar'] {
 				height: 0.3rem;
+				margin: 0.6rem 0;
 				overflow: hidden;
 				background: ${asVar('weakColor')};
 				border-radius: ${asVar('borderRadius')};

@@ -2,7 +2,7 @@
 import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
-import { BehaviorSubject, from } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { findHeadings } from '../../../../lib/parse-markdown'
 import { Attributes } from '../../../../lib/vote/attributes'
 import { provider } from '../../../../store/provider'
@@ -64,6 +64,10 @@ export const form = (
 			}
 			summary.col {
 				grid-auto-columns: auto 1fr 110px;
+			}
+			a {
+				color: ${asVar('primaryColor')};
+				text-decoration: none;
 			}
 			section h1,
 			section h2,
