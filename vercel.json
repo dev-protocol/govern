@@ -2,5 +2,5 @@
 	"public": true,
 	"cleanUrls": true,
 	"trailingSlash": false,
-	"rewrites": [{ "source": "/:address", "destination": "/index.html" }]
+	"rewrites": [{ "source": "/:address", "destination": "/" }]
 }
