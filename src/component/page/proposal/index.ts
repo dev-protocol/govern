@@ -15,11 +15,11 @@ import { vote } from './vote'
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
 	body:
-		'https://raw.githubusercontent.com/dev-protocol/DIPs/main/DIPS/dip-38.md',
+		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/proposal.md',
 	options: [
-		'https://raw.githubusercontent.com/dev-protocol/DIPs/main/template-general-dip.md#1',
-		'https://raw.githubusercontent.com/dev-protocol/DIPs/main/template-general-dip.md#2',
-		'https://raw.githubusercontent.com/dev-protocol/DIPs/main/template-general-dip.md#3',
+		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-1.md',
+		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-2.md',
+		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-3.md',
 	],
 	period: BigNumber.from(634673568),
 	bodyMimeType: 'text/markdown',
