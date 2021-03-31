@@ -1,7 +1,5 @@
-import { isNotNil } from '@devprotocol/util-ts'
 import markdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token'
-import { not } from 'ramda'
 
 export const parseMarkdown = (md = ''): readonly Token[] =>
 	new markdownIt().parse(md, {})

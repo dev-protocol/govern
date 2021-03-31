@@ -12,6 +12,7 @@ import { Contract } from 'ethers'
 import { asVar } from '../../../../style/custom-properties'
 import { primaryButton } from '../../../../style/presets'
 import { UndefinedOr } from '@devprotocol/util-ts'
+import { markedHTML } from '../../../../lib/marked-html'
 
 type Props = {
 	readonly contractAddress: string
@@ -52,6 +53,21 @@ export const form = (
 				margin: 0;
 				color: ${asVar('weakColor')};
 			}
+			summary::before {
+				content: '▼';
+				transform: rotate(-90deg);
+			}
+			details[open] summary::before {
+				transform: rotate(0);
+			}
+			summary.col {
+				grid-auto-columns: auto 1fr 110px;
+			}
+			section h1,
+			section h2,
+			section h3 {
+				font-size: 1em;
+			}
 			${primaryButton} button {
 				width: 100%;
 			}
@@ -68,8 +84,8 @@ export const form = (
 						</figure>
 						${repeat(options, (option, i) =>
 							(([heading]) => html`
-								<section>
-									<header class="col">
+								<details>
+									<summary class="col">
 										<h3>${heading}</h3>
 										<input
 											@change=${onChangeFactory(i)}
@@ -80,8 +96,9 @@ export const form = (
 											max="100"
 											step="1"
 										/>
-									</header>
-								</section>
+									</summary>
+									<section>${markedHTML(option)}</section>
+								</details>
 							`)(findHeadings(option))
 						)}
 						${subscribe(
