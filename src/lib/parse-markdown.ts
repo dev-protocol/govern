@@ -7,6 +7,7 @@ export const parseMarkdown = (md = ''): readonly Token[] =>
 export const findHeadings = (md = ''): readonly string[] =>
 	((tokens) =>
 		tokens
+			.map((token, _index) => ({ ...token, _index }))
 			.filter((token) => token.type === 'heading_open')
-			.map((_, i) => tokens[i + 1].content)
+			.map((token) => tokens[token._index + 1].content)
 			.filter((c) => c))(parseMarkdown(md))

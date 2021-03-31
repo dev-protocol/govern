@@ -11,7 +11,6 @@ import { UndefinedOr } from '@devprotocol/util-ts'
 import { U } from '../../../../lib/u'
 import { Contract } from 'ethers'
 import { vote as send } from '../../../../lib/vote/vote'
-import { numbersWithIndex } from '../../../../lib/numbers-with-index'
 import { connectOrConnected } from '../../../common/button/connect-or-connected'
 import { form } from './form'
 
@@ -33,10 +32,8 @@ const createOnVote = (
 	contract: Contract
 ) => async (ev: Event): Promise<void> => {
 	ev.preventDefault()
-	const values = numbersWithIndex(stores.map((s) => s.value ?? 0))
-	const options = values.map((v) => v.index)
-	const percentiles = values.map((v) => v.value)
-	await send({ contract, args: [options, percentiles] }).catch((error: Error) =>
+	const values = stores.map((s) => s.value || 0)
+	await send({ contract, args: [values] }).catch((error: Error) =>
 		err.next(error.message)
 	)
 }
