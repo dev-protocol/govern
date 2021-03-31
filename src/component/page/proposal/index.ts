@@ -3,7 +3,6 @@ import { html } from 'lit-html'
 import { from } from 'rxjs'
 import { attributes, parseAttributes } from '../../../lib/vote/attributes'
 import { createVoteContract } from '../../../lib/vote/create-vote-contract'
-import { BigNumber } from '@ethersproject/bignumber'
 import { always } from 'ramda'
 import { asVar } from '../../../style/custom-properties'
 import { standloneProvider } from '../../../lib/standalone-provider'
@@ -22,7 +21,7 @@ const dummy = {
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-2.md',
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-3.md',
 	],
-	period: BigNumber.from(634673568),
+	period: 634673568,
 	bodyMimeType: 'text/markdown',
 	optionsMimeType: 'text/markdown',
 	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
