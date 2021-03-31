@@ -9,6 +9,8 @@ import { waitForNotNullable } from '../../../../lib/wait-for-not-nullable'
 import { provider } from '../../../../store/provider'
 import { createVoteContract } from '../../../../lib/vote/create-vote-contract'
 import { Contract } from 'ethers'
+import { asVar } from '../../../../style/custom-properties'
+import { primaryButton } from '../../../../style/presets'
 
 type Props = {
 	readonly contractAddress: string
@@ -24,7 +26,34 @@ export const form = ({
 	options,
 }: Props): DirectiveFunction => {
 	return component(html`
-		<style></style>
+		<style>
+			form {
+				display: grid;
+				gap: 1rem;
+			}
+			.col {
+				display: grid;
+				gap: 1rem;
+				grid-auto-columns: 1fr 110px;
+				grid-auto-flow: column;
+			}
+			input {
+				font-size: 1.8rem;
+				padding: 0.5rem;
+				text-align: center;
+				border: 1px solid ${asVar('fontColor')};
+				border-radius: ${asVar('borderRadius')};
+			}
+			h3 {
+				margin: 0;
+			}
+			figure {
+				font-size: 0.8em;
+				margin: 0;
+				color: ${asVar('weakColor')};
+			}
+			${primaryButton}
+		</style>
 		${subscribe(
 			from(waitForNotNullable(provider)),
 			(wallet) => {
@@ -32,19 +61,24 @@ export const form = ({
 				const onVote = onVoteFactory(contract)
 				return html`
 					<form @submit=${onVote}>
+						<figure class="col">
+							<span>Option</span> <span>Vote(%)</span>
+						</figure>
 						${repeat(options, (option, i) =>
 							(([heading]) => html`
 								<section>
-									<h3>${heading}</h3>
-									<input
-										@change=${onChangeFactory(i)}
-										type="number"
-										name="option_${i}"
-										required
-										min="0"
-										max="100"
-										step="1"
-									/>
+									<header class="col">
+										<h3>${heading}</h3>
+										<input
+											@change=${onChangeFactory(i)}
+											type="number"
+											name="option_${i}"
+											required
+											min="0"
+											max="100"
+											step="1"
+										/>
+									</header>
 								</section>
 							`)(findHeadings(option))
 						)}

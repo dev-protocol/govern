@@ -63,6 +63,7 @@ export const vote = (
 				background: red;
 				color: white;
 				border-radius: ${asVar('borderRadius')};
+				padding: 0.6rem 1rem;
 			}
 			.header {
 				display: grid;
@@ -88,7 +89,9 @@ export const vote = (
 				<header>Vote</header>
 				${subscribe(provider, connectOrConnected)}
 			</div>
-			${subscribe(errStore, (err) => html` <span class="err">${err}</span> `)}
+			${subscribe(errStore, (err) =>
+				err ? html` <div class="err"><span>${err}</span></div>` : html``
+			)}
 			${form({ contractAddress, onVoteFactory, onChangeFactory, options })}
 		</section>
 	`)
