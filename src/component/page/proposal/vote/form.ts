@@ -5,14 +5,14 @@ import { repeat } from 'lit-html/directives/repeat'
 import { BehaviorSubject, from } from 'rxjs'
 import { findHeadings } from '../../../../lib/parse-markdown'
 import { Attributes } from '../../../../lib/vote/attributes'
-import { waitForNotNullable } from '../../../../lib/wait-for-not-nullable'
 import { provider } from '../../../../store/provider'
 import { createVoteContract } from '../../../../lib/vote/create-vote-contract'
 import { Contract } from 'ethers'
 import { asVar } from '../../../../style/custom-properties'
 import { primaryButton } from '../../../../style/presets'
-import { UndefinedOr } from '@devprotocol/util-ts'
+import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
 import { markedHTML } from '../../../../lib/marked-html'
+import { U } from '../../../../lib/u'
 
 type Props = {
 	readonly contractAddress: string
@@ -72,44 +72,42 @@ export const form = (
 				width: 100%;
 			}
 		</style>
-		${subscribe(
-			from(waitForNotNullable(provider)),
-			(wallet) => {
-				const contract = createVoteContract(wallet.getSigner(), contractAddress)
-				const onVote = onVoteFactory(contract)
-				return html`
-					<form @submit=${onVote}>
-						<figure class="col">
-							<span>Option</span> <span>Vote(%)</span>
-						</figure>
-						${repeat(options, (option, i) =>
-							(([heading]) => html`
-								<details>
-									<summary class="col">
-										<h3>${heading}</h3>
-										<input
-											@change=${onChangeFactory(i)}
-											type="number"
-											name="option_${i}"
-											required
-											min="0"
-											max="100"
-											step="1"
-										/>
-									</summary>
-									<section>${markedHTML(option)}</section>
-								</details>
-							`)(findHeadings(option))
-						)}
-						${subscribe(
-							errorStore,
-							(err) =>
-								html`<button type="submit" ?disabled=${err}>Vote</button>`
-						)}
-					</form>
-				`
-			},
-			html`Please connect to a wallet`
-		)}
+		${subscribe(provider, (wallet) => {
+			const contract = whenDefined(wallet, (x) =>
+				createVoteContract(x.getSigner(), contractAddress)
+			)
+			const onVote = whenDefined(contract, onVoteFactory)
+			return html`
+				<form @submit=${onVote}>
+					<figure class="col"><span>Option</span> <span>Vote(%)</span></figure>
+					${repeat(options, (option, i) =>
+						(([heading]) => html`
+							<details>
+								<summary class="col">
+									<h3>${heading}</h3>
+									<input
+										@change=${onChangeFactory(i)}
+										type="number"
+										name="option_${i}"
+										required
+										min="0"
+										max="100"
+										step="1"
+									/>
+								</summary>
+								<section>${markedHTML(option)}</section>
+							</details>
+						`)(findHeadings(option))
+					)}
+					${subscribe(
+						errorStore,
+						(err) =>
+							html`<button type="submit" ?disabled=${onVote === U || err}>
+								Vote
+							</button>`
+					)}
+				</form>
+			`
+		})}
 	`)
 }
