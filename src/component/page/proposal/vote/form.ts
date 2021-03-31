@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-return-void */
 import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html, TemplateResult } from 'lit-html'
+import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import { BehaviorSubject, from } from 'rxjs'
 import { findHeadings } from '../../../../lib/parse-markdown'
@@ -35,6 +35,7 @@ export const form = (
 				gap: 1rem;
 				grid-auto-columns: 1fr 110px;
 				grid-auto-flow: column;
+				align-items: center;
 			}
 			input {
 				font-size: 1.8rem;

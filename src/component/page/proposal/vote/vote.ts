@@ -17,6 +17,7 @@ import { form } from './form'
 
 const ERR = {
 	NOT_100: 'Please set the total value to 100',
+	NOT_UNIQUE: 'The same number of votes is invalid',
 }
 const calcTotal = (values: readonly UndefinedOr<number>[]): number =>
 	values.map((v) => v ?? 0).reduce((p, x) => p + x)
@@ -46,7 +47,15 @@ const createOnChange = (
 	stores[index].next(Number((ev.target as HTMLInputElement).value) || 0)
 	const values = stores.map((s) => s.value)
 	const total = calcTotal(values)
-	err.next(values.includes(U) ? U : total === 100 ? U : ERR.NOT_100)
+	err.next(
+		values.includes(U)
+			? U
+			: total === 100
+			? values.every((v) => values.filter((w) => v === w).length === 1)
+				? U
+				: ERR.NOT_UNIQUE
+			: ERR.NOT_100
+	)
 }
 
 export const vote = (
