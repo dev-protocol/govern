@@ -9,8 +9,9 @@ import { asVar } from '../../../style/custom-properties'
 import { standloneProvider } from '../../../lib/standalone-provider'
 import { markedHTML } from '../../../lib/marked-html'
 import { container } from '../../common/container'
-import { stats } from './stats'
+import { results } from './results'
 import { vote } from './vote/vote'
+import { stats } from './stats'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -46,9 +47,11 @@ export default (contractAddress: string): DirectiveFunction =>
 						li {
 							padding: 1rem;
 						}
-						main {
+						main,
+						aside {
 							display: grid;
 							grid-gap: 1rem;
+							align-content: baseline;
 						}
 						@media (min-width: 920px) {
 							main {
@@ -58,7 +61,11 @@ export default (contractAddress: string): DirectiveFunction =>
 					</style>
 					<main>
 						<article>${markedHTML(attributes.body)}</article>
-						<aside>${stats(contractAddress, attributes.options)}</aside>
+						<aside>
+							${results(contractAddress, attributes.options)}${stats(
+								attributes
+							)}
+						</aside>
 						${vote(contractAddress, attributes.options)}
 					</main>
 				`)
