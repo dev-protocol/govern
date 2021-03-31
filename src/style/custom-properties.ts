@@ -2,7 +2,7 @@ export const properties = {
 	baseColor: ['#fff', '#000'],
 	primaryColor: ['#e91e63'],
 	primaryVariantColor: ['#ec407a'],
-	secondaryColor: ['#ff9800', '#9575cd'],
+	secondaryColor: ['#9575cd'],
 	secondaryVariantColor: ['#ffc107'],
 	onPrimaryColor: ['#fff'],
 	onPrimaryVariantColor: ['#fff'],
@@ -19,7 +19,7 @@ export const properties = {
 	fontFamilyHeading: ["'WhyteInktrap', sans-serif"],
 	fontFamilyBody: ["'Whyte', sans-serif"],
 	fontFamilyUI: ["'Whyte', sans-serif"],
-	containerWidth: ['980px'],
+	containerWidth: ['1024px'],
 	borderRadius: ['3px'],
 }
 

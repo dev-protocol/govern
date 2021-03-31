@@ -25,6 +25,7 @@ const dummy = {
 	period: BigNumber.from(634673568),
 	bodyMimeType: 'text/markdown',
 	optionsMimeType: 'text/markdown',
+	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
 }
 
 export default (contractAddress: string): DirectiveFunction =>
@@ -47,11 +48,15 @@ export default (contractAddress: string): DirectiveFunction =>
 						li {
 							padding: 1rem;
 						}
-						main,
-						aside {
+						main {
 							display: grid;
 							grid-gap: 1rem;
-							align-content: baseline;
+						}
+						.aside {
+							position: sticky;
+							top: 1rem;
+							display: grid;
+							grid-gap: 1rem;
 						}
 						@media (min-width: 920px) {
 							main {
@@ -62,9 +67,11 @@ export default (contractAddress: string): DirectiveFunction =>
 					<main>
 						<article>${markedHTML(attributes.body)}</article>
 						<aside>
-							${results(contractAddress, attributes.options)}${stats(
-								attributes
-							)}
+							<div class="aside">
+								${results(contractAddress, attributes.options)}${stats(
+									attributes
+								)}
+							</div>
 						</aside>
 						${vote(contractAddress, attributes.options)}
 					</main>

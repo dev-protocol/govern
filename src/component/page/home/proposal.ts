@@ -21,6 +21,7 @@ const dummy = {
 	period: BigNumber.from(634673568),
 	bodyMimeType: 'text/markdown',
 	optionsMimeType: 'text/markdown',
+	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
 }
 
 export const proposal = (contractAddress: string): DirectiveFunction =>

@@ -7,10 +7,11 @@ type Options = {
 export type Attributes = {
 	readonly subject: string
 	readonly body: string
-	readonly period: BigNumber
+	readonly period: number
 	readonly options: readonly string[]
 	readonly bodyMimeType: string
 	readonly optionsMimeType: string
+	readonly proposer: string
 }
 
 const fetcher = async (url: string): Promise<string> => {

@@ -8,4 +8,7 @@ const address = '0x0'
 export const createVoteContract = (
 	provider: Provider | Signer,
 	contractAddress = address
-): Contract => new Contract(contractAddress, voteAbi, provider)
+): Contract => {
+	const contract = new Contract(contractAddress, voteAbi, provider)
+	return contract
+}

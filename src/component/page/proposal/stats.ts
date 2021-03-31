@@ -4,32 +4,66 @@ import { timer } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { standloneProvider } from '../../../lib/standalone-provider'
 import { Attributes } from '../../../lib/vote/attributes'
+import { asVar } from '../../../style/custom-properties'
+import { a } from '../../common/a'
 import { asideContainer, asideHeading } from './styles'
 
-export const stats = (attributes: Attributes): DirectiveFunction =>
-	component(html`
+export const stats = (attributes: Attributes): DirectiveFunction => {
+	const blockTimer = timer(0, 5000).pipe(
+		switchMap((_) => standloneProvider.getBlockNumber())
+	)
+	return component(html`
 		<style>
-			header {
-				${asideHeading};
+			${asideHeading('header')} ${asideContainer('dl')} dl {
+				margin: 0;
+				grid-template: auto / 8em 1fr;
 			}
-			dl {
-				${asideContainer};
+			dd {
+				margin: 0;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+			a {
+				color: ${asVar('secondaryColor')};
+			}
+			dl > *:first-child {
+				grid-column: 1 / 3;
+			}
+			.status {
+				padding: 0.3rem 0.8rem;
+				border-radius: 99rem;
+				color: white;
+				text-align: center;
+				text-transform: capitalize;
+			}
+			.status.open {
+				background: ${asVar('secondaryColor')};
+			}
+			.status.closed {
+				background: ${asVar('weakColor')};
 			}
 		</style>
 		<section>
 			<header>Stats</header>
 			<dl>
-				<dt>Closed block</dt>
-				<dd>${attributes.period}</dd>
-				<dt>Current</dt>
+				${subscribe(blockTimer, (res) =>
+					((status) => html`<div class="status ${status}">${status}</div>`)(
+						res < attributes.period ? 'open' : 'closed'
+					)
+				)}
+
+				<dt>Proposer</dt>
 				<dd>
-					${subscribe(
-						timer(0, 5000).pipe(
-							switchMap((_) => standloneProvider.getBlockNumber())
-						),
-						(res) => html`${res}`
-					)}
+					${a({
+						href: `//etherscan.io/address/${attributes.proposer}`,
+						children: attributes.proposer,
+					})}
 				</dd>
+				<dt>Closing block</dt>
+				<dd>${attributes.period}</dd>
+				<dt>Current block</dt>
+				<dd>${subscribe(blockTimer, (res) => html`${res}`)}</dd>
 			</dl>
 		</section>
 	`)
+}
