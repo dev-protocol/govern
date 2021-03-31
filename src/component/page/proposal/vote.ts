@@ -16,6 +16,7 @@ import { createVoteContract } from '../../../lib/vote/create-vote-contract'
 import { Contract } from 'ethers'
 import { vote as send } from '../../../lib/vote/vote'
 import { numbersWithIndex } from '../../../lib/numbers-with-index'
+import { connectOrConnected } from '../../common/button/connect-or-connected'
 
 const ERR = {
 	NOT_100: 'Please set the total value to 100',
@@ -64,10 +65,15 @@ export const vote = (
 				color: white;
 				border-radius: ${asVar('borderRadius')};
 			}
+			.header {
+				display: grid;
+				grid-auto-flow: column;
+				justify-content: space-between;
+				align-items: center;
+			}
 			header {
 				font-weight: bold;
 				font-family: ${asVar('fontFamilyHeading')};
-				margin-bottom: 0.5rem;
 				font-size: 1.4rem;
 			}
 			:host > section {
@@ -79,7 +85,10 @@ export const vote = (
 			}
 		</style>
 		<section>
-			<header>Vote</header>
+			<div class="header">
+				<header>Vote</header>
+				${subscribe(provider, connectOrConnected)}
+			</div>
 			${subscribe(errStore, (err) => html` <span class="err">${err}</span> `)}
 			${subscribe(
 				from(waitForNotNullable(provider)),

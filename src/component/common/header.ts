@@ -1,35 +1,13 @@
-import { DirectiveFunction, component, subscribe } from '@aggre/ullr'
+import { subscribe } from '@aggre/ullr'
 import { html } from 'lit-html'
-import { until } from 'lit-html/directives/until'
 import { always } from 'ramda'
-import { provider, StoreProvider } from '../../store/provider'
+import { provider } from '../../store/provider'
 import { asVar } from '../../style/custom-properties'
 import { a } from './a'
 import { connect } from './button/connect'
+import { connectOrConnected } from './button/connect-or-connected'
 
-const connectButton = connect('Connect to a wallet')
-const connectOrConnected = (prov: StoreProvider): DirectiveFunction =>
-	prov
-		? component(html`
-				<style>
-					section {
-						display: grid;
-						grid-auto-columns: 1fr 120px;
-						grid-auto-flow: column;
-						grid-gap: 1rem;
-					}
-					.address {
-						text-overflow: ellipsis;
-						overflow: hidden;
-					}
-				</style>
-				<section>
-					<span> Connected </span>
-					<span class="address"> ${until(prov.getSigner().getAddress())} </span>
-				</section>
-		  `)
-		: connectButton
-
+export const connectButton = connect('Connect to a wallet')
 export const header = always(html`
 	<style>
 		header {
