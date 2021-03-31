@@ -9,18 +9,25 @@ import proposal from './proposal'
 export default component(
 	html`
 		<style>
-			:host {
+			:host,
+			.content {
 				display: grid;
 				grid-gap: 1rem;
 			}
+			:host {
+				min-height: 100vh;
+				align-content: space-between;
+			}
 		</style>
-		${header()}
-		${subscribe(route, (r) =>
-			((paths) =>
-				paths.length === 1 && paths[0]?.startsWith('0x')
-					? proposal(paths[0])
-					: home)(r.replace(/^\/(.*)/, '$1').split('/'))
-		)}
-		${footer()}
+		<div class="content">
+			${header()}
+			${subscribe(route, (r) =>
+				((paths) =>
+					paths.length === 1 && paths[0]?.startsWith('0x')
+						? proposal(paths[0])
+						: home)(r.replace(/^\/(.*)/, '$1').split('/'))
+			)}
+		</div>
+		${footer}
 	`
 )
