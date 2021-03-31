@@ -1,8 +1,8 @@
 /* eslint-disable functional/no-return-void */
 import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { html, TemplateResult } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
-import { from } from 'rxjs'
+import { BehaviorSubject, from } from 'rxjs'
 import { findHeadings } from '../../../../lib/parse-markdown'
 import { Attributes } from '../../../../lib/vote/attributes'
 import { waitForNotNullable } from '../../../../lib/wait-for-not-nullable'
@@ -11,6 +11,7 @@ import { createVoteContract } from '../../../../lib/vote/create-vote-contract'
 import { Contract } from 'ethers'
 import { asVar } from '../../../../style/custom-properties'
 import { primaryButton } from '../../../../style/presets'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
 type Props = {
 	readonly contractAddress: string
@@ -19,12 +20,10 @@ type Props = {
 	readonly onChangeFactory: (index: number) => (ev: InputEvent) => void
 }
 
-export const form = ({
-	contractAddress,
-	onVoteFactory,
-	onChangeFactory,
-	options,
-}: Props): DirectiveFunction => {
+export const form = (
+	{ contractAddress, onVoteFactory, onChangeFactory, options }: Props,
+	errorStore: BehaviorSubject<UndefinedOr<string>>
+): DirectiveFunction => {
 	return component(html`
 		<style>
 			form {
@@ -52,7 +51,9 @@ export const form = ({
 				margin: 0;
 				color: ${asVar('weakColor')};
 			}
-			${primaryButton}
+			${primaryButton} button {
+				width: 100%;
+			}
 		</style>
 		${subscribe(
 			from(waitForNotNullable(provider)),
@@ -82,7 +83,11 @@ export const form = ({
 								</section>
 							`)(findHeadings(option))
 						)}
-						<button type="submit">Vote</button>
+						${subscribe(
+							errorStore,
+							(err) =>
+								html`<button type="submit" ?disabled=${err}>Vote</button>`
+						)}
 					</form>
 				`
 			},

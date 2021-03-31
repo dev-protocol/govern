@@ -32,4 +32,8 @@ export const primaryButton = `
 		font-family: ${asVar('fontFamilyUI')};
 		border-radius: ${asVar('borderRadius')};
 	}
+	button[disabled] {
+		background: ${asVar('weakColor')};
+		cursor: initial;
+	}
 `

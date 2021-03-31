@@ -92,7 +92,15 @@ export const vote = (
 			${subscribe(errStore, (err) =>
 				err ? html` <div class="err"><span>${err}</span></div>` : html``
 			)}
-			${form({ contractAddress, onVoteFactory, onChangeFactory, options })}
+			${form(
+				{
+					contractAddress,
+					onVoteFactory,
+					onChangeFactory,
+					options,
+				},
+				errStore
+			)}
 		</section>
 	`)
 }
