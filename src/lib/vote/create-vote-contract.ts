@@ -3,11 +3,9 @@ import { Provider } from '@ethersproject/abstract-provider'
 import { Signer } from '@ethersproject/abstract-signer'
 import { voteAbi } from './abi'
 
-const address = '0x0'
-
 export const createVoteContract = (
 	provider: Provider | Signer,
-	contractAddress = address
+	contractAddress: string
 ): Contract => {
 	const contract = new Contract(contractAddress, voteAbi, provider)
 	return contract
