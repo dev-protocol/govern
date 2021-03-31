@@ -10,7 +10,7 @@ import { standloneProvider } from '../../../lib/standalone-provider'
 import { markedHTML } from '../../../lib/marked-html'
 import { container } from '../../common/container'
 import { stats } from './stats'
-import { vote } from './vote'
+import { vote } from './vote/vote'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
