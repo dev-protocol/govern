@@ -237,14 +237,17 @@
     sinon "9.2.4"
     url-join "4.0.1"
 
-"@devprotocol/vote-count-resolver@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@devprotocol/vote-count-resolver/-/vote-count-resolver-0.1.4.tgz#428c0b434c8bc1c4a85960ae9cb69da12569c448"
-  integrity sha512-9LvX60NcdMHhC1WZVY7oH919oX85z3K8xz1hrdv4R2o+nZ0s8KxH2BtXk/OzDXZLLPHWmkIo6UHN5ownzaHkmQ==
+"@devprotocol/vote-count-resolver@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@devprotocol/vote-count-resolver/-/vote-count-resolver-0.1.6.tgz#9b564065c4c6a2c0a1b6109646ee87c945890c34"
+  integrity sha512-uJnFFdUCkLX7ne+E/FrqxPVujn4LLcrigIGfpr+PWLhR0cOJF/1V3jDXpi8gF/yaxgRMmRWygEbAbpx5bVxlSg==
   dependencies:
     "@devprotocol/util-ts" "^2.2.1"
     "@openzeppelin/contracts" "3.4.1"
-    ramda "^0.27.1"
+    "@types/sinon" "9.0.11"
+    p-retry "^4.5.0"
+    ramda "0.27.1"
+    sinon "10.0.0"
 
 "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
@@ -965,6 +968,11 @@
   integrity sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ==
   dependencies:
     "@types/node" "*"
+
+"@types/retry@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
+  integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
 "@types/secp256k1@^4.0.1":
   version "4.0.1"
@@ -7066,6 +7074,14 @@ p-map@^4.0.0:
   dependencies:
     aggregate-error "^3.0.0"
 
+p-retry@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/p-retry/-/p-retry-4.5.0.tgz#6685336b3672f9ee8174d3769a660cb5e488521d"
+  integrity sha512-5Hwh4aVQSu6BEP+w2zKlVXtFAaYQe1qWuVADSgoeVlLjwe/Q/AMSoRR4MDeaAfu8llT+YNbEijWu/YF3m6avkg==
+  dependencies:
+    "@types/retry" "^0.12.0"
+    retry "^0.12.0"
+
 p-timeout@^1.1.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-1.2.1.tgz#5eb3b353b7fce99f101a1038880bb054ebbea386"
@@ -7987,6 +8003,11 @@ ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
+
+retry@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
+  integrity sha1-G0KmJmoh8HQh0bC1S33BZ7AcATs=
 
 reusify@^1.0.4:
   version "1.0.4"
