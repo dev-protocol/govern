@@ -9,9 +9,6 @@ import { ul } from '../../../style/reset/ul'
 import { BigNumber, constants } from 'ethers'
 import { asVar } from '../../../style/custom-properties'
 import { asideHeading, asideContainer } from './styles'
-import { waitForNotNullable } from '../../../lib/wait-for-not-nullable'
-import { provider } from '../../../store/provider'
-import { switchMap } from 'rxjs/operators'
 import { getVotes as dummy } from '../../../mock/@devprotocol/governance'
 import { always } from 'ramda'
 import { standloneProvider } from '../../../lib/standalone-provider'
@@ -21,8 +18,13 @@ const BASIS = 10000
 const calcShare = (
 	num: BigNumber | string,
 	total: BigNumber | string
-): number =>
-	BigNumber.from(num).mul(BASIS).div(total).mul(100).toNumber() / BASIS
+): number => {
+	const bN = BigNumber.from(num)
+	const bT = BigNumber.from(total)
+	return bN.isZero() || bT.isZero()
+		? 0
+		: bN.mul(BASIS).div(bT).mul(100).toNumber() / BASIS
+}
 const de18ize = (num: BigNumber | string): number =>
 	BigNumber.from(num).mul(BASIS).div(constants.WeiPerEther).toNumber() / BASIS
 

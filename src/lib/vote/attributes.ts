@@ -1,4 +1,5 @@
 import { BigNumber, Contract } from 'ethers'
+import { normalizeArrayLikeObject } from '../normalize-array-like-object'
 
 type Options = {
 	readonly contract: Contract
@@ -7,7 +8,7 @@ type Options = {
 export type Attributes = {
 	readonly subject: string
 	readonly body: string
-	readonly period: number
+	readonly period: BigNumber
 	readonly options: readonly string[]
 	readonly bodyMimeType: string
 	readonly optionsMimeType: string
@@ -22,8 +23,8 @@ const fetcher = async (url: string): Promise<string> => {
 export const attributes = async ({
 	contract,
 }: Options): Promise<Attributes> => {
-	const results: Attributes = await contract.functions.attributes()
-	return results
+	const [results] = await contract.functions.attributes()
+	return normalizeArrayLikeObject(results)
 }
 
 export const parseAttributes = async (

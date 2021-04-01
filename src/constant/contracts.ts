@@ -1,5 +1,5 @@
 export const contracts = [
-	'0x1d415aa39d647834786eb9b5a333a50e9935b796',
+	'0x6Fa7eE3f8ab5F1b1854730b8b69BA7F5d58D66c0',
 	'0x2a012e1dc8cbd3142c872ab5481a23f7748a3764',
 ]
 

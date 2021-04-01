@@ -8,6 +8,7 @@ import { always } from 'ramda'
 import { asVar } from '../../../style/custom-properties'
 import { standloneProvider } from '../../../lib/standalone-provider'
 import { placeholder } from '../../common/placeholder'
+import { BigNumber } from 'ethers'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -18,7 +19,7 @@ const dummy = {
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-2.md',
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-3.md',
 	],
-	period: 634673568,
+	period: BigNumber.from(634673568),
 	bodyMimeType: 'text/markdown',
 	optionsMimeType: 'text/markdown',
 	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
