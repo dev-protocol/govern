@@ -21,10 +21,17 @@ export default container(
 			ul > *:not(:last-child) {
 				border-bottom: 1px solid ${asVar('onSurfaceColor')};
 			}
+			.empty {
+				border: 1px solid ${asVar('onSurfaceColor')};
+				border-radius: ${asVar('borderRadius')};
+				padding: 1rem;
+			}
 		</style>
 		<h2>Proposals</h2>
-		<ul>
-			${repeat(contracts, proposal)}
-		</ul>
+		${contracts.length
+			? html`<ul>
+					${repeat(contracts, proposal)}
+			  </ul>`
+			: html`<div class="empty">There aren't any proposals</div>`}
 	`
 )
