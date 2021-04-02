@@ -81,8 +81,7 @@ export default (contractAddress: string): DirectiveFunction => {
 							html`
 								<aside>
 									<div class="aside">
-										${results(contractAddress, attributes.options)}
-										${stats(attributes)}
+										${results(contractAddress, attributes)} ${stats(attributes)}
 									</div>
 								</aside>
 							`,

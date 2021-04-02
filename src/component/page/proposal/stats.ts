@@ -1,17 +1,12 @@
 import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
 import { html } from 'lit-html'
-import { timer } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
-import { standloneProvider } from '../../../lib/standalone-provider'
 import { Attributes } from '../../../lib/vote/attributes'
+import { blockTimer } from '../../../store/block-timer'
 import { asVar } from '../../../style/custom-properties'
 import { a } from '../../common/a'
 import { asideContainer, asideHeading } from './styles'
 
 export const stats = (attributes: Attributes): DirectiveFunction => {
-	const blockTimer = timer(0, 5000).pipe(
-		switchMap((_) => standloneProvider.getBlockNumber())
-	)
 	return component(html`
 		<style>
 			${asideHeading('header')} ${asideContainer('dl')} dl {
@@ -48,7 +43,7 @@ export const stats = (attributes: Attributes): DirectiveFunction => {
 			<dl>
 				${subscribe(blockTimer, (res) =>
 					((status) => html`<div class="status ${status}">${status}</div>`)(
-						res < attributes.period ? 'open' : 'closed'
+						res < attributes.period.toNumber() ? 'open' : 'closed'
 					)
 				)}
 
