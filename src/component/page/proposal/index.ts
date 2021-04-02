@@ -52,7 +52,7 @@ export default (contractAddress: string): DirectiveFunction => {
 						display: grid;
 						grid-gap: 1rem;
 					}
-					.aside {
+					aside {
 						position: sticky;
 						top: 1rem;
 						display: grid;
