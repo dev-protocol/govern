@@ -37,3 +37,24 @@ export const primaryButton = `
 		cursor: initial;
 	}
 `
+
+export const table = `
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		border-spacing: 0;
+		text-align: left;
+	}
+	thead {
+		background: ${asVar('surfaceColor')};
+	}
+	th {
+		padding: 0.2rem 0.3rem;
+		border: 1px solid ${asVar('weakColor')};
+	}
+	td {
+		padding: 0.2rem 0.3rem;
+		border: 1px solid ${asVar('weakColor')};
+		white-space: nowrap;
+	}
+`

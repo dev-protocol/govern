@@ -9,7 +9,7 @@ import { provider } from '../../../../store/provider'
 import { createVoteContract } from '../../../../lib/vote/create-vote-contract'
 import { Contract } from 'ethers'
 import { asVar } from '../../../../style/custom-properties'
-import { primaryButton } from '../../../../style/presets'
+import { primaryButton, table } from '../../../../style/presets'
 import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
 import { markedHTML } from '../../../../lib/marked-html'
 import { U } from '../../../../lib/u'
@@ -77,6 +77,7 @@ export const form = (
 			${primaryButton} button {
 				width: 100%;
 			}
+			${table}
 		</style>
 		${subscribe(provider, (wallet) => {
 			const contract = whenDefined(wallet, (x) =>

@@ -12,6 +12,8 @@ import { results } from './results'
 import { vote } from './vote/vote'
 import { stats } from './stats'
 import { placeholder } from '../../common/placeholder'
+import { table } from '../../../style/presets'
+import { BigNumber } from 'ethers'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -22,7 +24,7 @@ const dummy = {
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-2.md',
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-3.md',
 	],
-	period: 634673568,
+	period: BigNumber.from(634673568),
 	bodyMimeType: 'text/markdown',
 	optionsMimeType: 'text/markdown',
 	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
@@ -61,6 +63,7 @@ export default (contractAddress: string): DirectiveFunction => {
 							grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
 						}
 					}
+					${table}
 				</style>
 				<main>
 					${subscribe(
