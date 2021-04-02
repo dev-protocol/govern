@@ -69,6 +69,9 @@ export const form = (
 				color: ${asVar('primaryColor')};
 				text-decoration: none;
 			}
+			img {
+				max-width: 100%;
+			}
 			section h1,
 			section h2,
 			section h3 {

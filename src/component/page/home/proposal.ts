@@ -31,6 +31,9 @@ export const proposal = (contractAddress: string): DirectiveFunction =>
 				color: ${asVar('primaryColor')};
 				text-decoration: none;
 			}
+			img {
+				max-width: 100%;
+			}
 			li {
 				padding: 1rem;
 			}
