@@ -6,10 +6,10 @@ test('calling `Vote.attributes` and returns the results', async (t) => {
 		functions: {
 			attributes: (...args: readonly any[]) => {
 				t.deepEqual(args, [])
-				return 1
+				return [{ a: 1 }]
 			},
 		},
 	} as any
 	const result = await attributes({ contract })
-	t.is(result, 1 as any)
+	t.deepEqual(result, { a: 1 } as any)
 })

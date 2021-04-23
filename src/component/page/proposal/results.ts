@@ -4,7 +4,7 @@ import { repeat } from 'lit-html/directives/repeat'
 import { forkJoin, from, zip } from 'rxjs'
 import { findHeadings } from '../../../lib/parse-markdown'
 import { Attributes } from '../../../lib/vote/attributes'
-import { getVotes } from '@devprotocol/vote-count-resolver'
+import { getVotes, VoteInfo } from '@devprotocol/vote-count-resolver'
 import { ul } from '../../../style/reset/ul'
 import { BigNumber, constants } from 'ethers'
 import { asVar } from '../../../style/custom-properties'
@@ -77,7 +77,7 @@ export const results = (
 					),
 					([votes, blockNumber]) => {
 						const total = votes
-							.map(({ count }) => count)
+							.map(({ count }: VoteInfo) => count)
 							.reduce(
 								(p, x) => BigNumber.from(p).add(BigNumber.from(x)),
 								constants.Zero
