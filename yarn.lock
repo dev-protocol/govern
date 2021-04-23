@@ -237,10 +237,10 @@
     sinon "9.2.4"
     url-join "4.0.1"
 
-"@devprotocol/vote-count-resolver@0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@devprotocol/vote-count-resolver/-/vote-count-resolver-0.1.6.tgz#9b564065c4c6a2c0a1b6109646ee87c945890c34"
-  integrity sha512-uJnFFdUCkLX7ne+E/FrqxPVujn4LLcrigIGfpr+PWLhR0cOJF/1V3jDXpi8gF/yaxgRMmRWygEbAbpx5bVxlSg==
+"@devprotocol/vote-count-resolver@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/vote-count-resolver/-/vote-count-resolver-0.2.0.tgz#cc6711baccf823e3bac675ede7b0ecef39dd3207"
+  integrity sha512-819JLfBKrMZWIcoV+n4/3O2dliWczHH2eXW1/22ElkRtKQmgYx8DLSPsq4Jxyev5hhktANqHVzFtBbwMFR6jjg==
   dependencies:
     "@devprotocol/util-ts" "^2.2.1"
     "@openzeppelin/contracts" "3.4.1"
