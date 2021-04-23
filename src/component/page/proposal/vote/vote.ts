@@ -57,9 +57,9 @@ const createOnChange = (
 
 export const vote = (
 	contractAddress: string,
-	options: Attributes['options']
+	attributes: Attributes
 ): DirectiveFunction => {
-	const stores = createStores(options)
+	const stores = createStores(attributes.options)
 	const errStore = createErrorStore()
 	const onVoteFactory = createOnVote(stores, errStore)
 	const onChangeFactory = createOnChange(stores, errStore)
@@ -103,7 +103,7 @@ export const vote = (
 					contractAddress,
 					onVoteFactory,
 					onChangeFactory,
-					options,
+					attributes,
 				},
 				errStore
 			)}

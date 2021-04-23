@@ -30,12 +30,13 @@ export const attributes = async ({
 export const parseAttributes = async (
 	attrs: Attributes
 ): Promise<Attributes> => {
-	const { body: _body, options: _options } = attrs
-	const results = await Promise.all([
-		fetcher(_body),
-		Promise.all(_options.map(fetcher)),
-	])
-	const [body, options] = results
+	const { body: _body, options: _options, optionsMimeType } = attrs
+	const fetchBody = fetcher(_body)
+	const fetchOptions = Promise.all(_options.map(fetcher))
+	const [body, options] =
+		optionsMimeType === 'text/plain'
+			? await Promise.all([fetchBody, _options])
+			: await Promise.all([fetchBody, fetchOptions])
 	return {
 		...attrs,
 		body,

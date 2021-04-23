@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-return-void */
 import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { html, TemplateResult } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import { BehaviorSubject } from 'rxjs'
 import { findHeadings } from '../../../../lib/parse-markdown'
@@ -16,15 +16,27 @@ import { U } from '../../../../lib/u'
 
 type Props = {
 	readonly contractAddress: string
-	readonly options: Attributes['options']
+	readonly attributes: Attributes
 	readonly onVoteFactory: (contract: Contract) => (ev: Event) => Promise<void>
 	readonly onChangeFactory: (index: number) => (ev: InputEvent) => void
 }
 
 export const form = (
-	{ contractAddress, onVoteFactory, onChangeFactory, options }: Props,
+	{ contractAddress, onVoteFactory, onChangeFactory, attributes }: Props,
 	errorStore: BehaviorSubject<UndefinedOr<string>>
 ): DirectiveFunction => {
+	const input = (i: number): TemplateResult => html`<input
+		@change=${onChangeFactory(i)}
+		type="number"
+		name="option_${i}"
+		required
+		min="0"
+		max="100"
+		step="1"
+	/>`
+	const h3 = (content: string): TemplateResult => html`<h3>${content}</h3>`
+	const isPlainText = attributes.optionsMimeType === 'text/plain' ? true : true
+
 	return component(html`
 		<style>
 			form {
@@ -90,24 +102,16 @@ export const form = (
 			return html`
 				<form @submit=${onVote}>
 					<figure class="col"><span>Option</span> <span>Vote(%)</span></figure>
-					${repeat(options, (option, i) =>
-						(([heading]) => html`
-							<details>
-								<summary class="col">
-									<h3>${heading}</h3>
-									<input
-										@change=${onChangeFactory(i)}
-										type="number"
-										name="option_${i}"
-										required
-										min="0"
-										max="100"
-										step="1"
-									/>
-								</summary>
-								<section>${markedHTML(option)}</section>
-							</details>
-						`)(findHeadings(option))
+					${repeat(attributes.options, (option, i) =>
+						((heading) =>
+							isPlainText
+								? html` <div class="col">${h3(heading)} ${input(i)}</div> `
+								: html`
+										<details>
+											<summary class="col">${h3(heading)} ${input(i)}</summary>
+											<section>${markedHTML(option)}</section>
+										</details>
+								  `)(isPlainText ? option : findHeadings(option)[0])
 					)}
 					${subscribe(
 						errorStore,

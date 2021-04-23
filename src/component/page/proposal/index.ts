@@ -71,7 +71,7 @@ export default (contractAddress: string): DirectiveFunction => {
 						(attributes) =>
 							html`
 								<article>${markedHTML(attributes.body)}</article>
-								${vote(contractAddress, attributes.options)}
+								${vote(contractAddress, attributes)}
 							`,
 						placeholder({ row: 6 })
 					)}
