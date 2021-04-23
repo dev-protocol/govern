@@ -20,7 +20,7 @@
 	"dependencies": {
 		"@aggre/ullr": "1.0.3",
 		"@devprotocol/util-ts": "2.2.1",
-		"@devprotocol/vote-count-resolver": "0.1.6",
+		"@devprotocol/vote-count-resolver": "0.2.0",
 		"@metamask/detect-provider": "1.2.0",
 		"@walletconnect/web3-provider": "1.4.1",
 		"ethers": "5.0.32",
