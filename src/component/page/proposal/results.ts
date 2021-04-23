@@ -1,7 +1,7 @@
 import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
-import { forkJoin, from, zip } from 'rxjs'
+import { from, zip } from 'rxjs'
 import { findHeadings } from '../../../lib/parse-markdown'
 import { Attributes } from '../../../lib/vote/attributes'
 import { getVotes, VoteInfo } from '@devprotocol/vote-count-resolver'
@@ -10,7 +10,7 @@ import { BigNumber, constants } from 'ethers'
 import { asVar } from '../../../style/custom-properties'
 import { asideHeading, asideContainer } from './styles'
 import { getVotes as dummy } from '../../../mock/@devprotocol/governance'
-import { always, compose, prop, reverse, sortBy } from 'ramda'
+import { always, reverse } from 'ramda'
 import { standloneProvider } from '../../../lib/standalone-provider'
 import { placeholder } from '../../common/placeholder'
 import { blockTimer } from '../../../store/block-timer'
@@ -26,14 +26,13 @@ const calcShare = (
 		? 0
 		: bN.mul(BASIS).div(bT).mul(100).toNumber() / BASIS
 }
+const tobg = (v: string | number | BigNumber): BigNumber => BigNumber.from(v)
 const de18ize = (num: BigNumber | string): number =>
-	BigNumber.from(num).mul(BASIS).div(constants.WeiPerEther).toNumber() / BASIS
-const sort = sortBy(
-	compose(
-		(num: string) => BigNumber.from(num).div(constants.WeiPerEther).toNumber(),
-		prop('count')
+	tobg(num).mul(BASIS).div(constants.WeiPerEther).toNumber() / BASIS
+const sort = (data: ReadonlyArray<VoteInfo>): ReadonlyArray<VoteInfo> =>
+	[...data].sort((a, b) =>
+		tobg(a.count).sub(b.count).div(constants.WeiPerEther).toNumber()
 	)
-)
 
 export const results = (
 	contractAddress: string,
