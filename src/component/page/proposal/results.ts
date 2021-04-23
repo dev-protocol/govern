@@ -105,9 +105,13 @@ export const results = (
 													role="presentation"
 												></span>
 											</div>
-											<span>#1 ${de18ize(counts[0])} votes</span>
-											<span>#2 ${de18ize(counts[1])} votes</span>
-											<span>#3 ${de18ize(counts[2])} votes</span>
+											${repeat(
+												attrs.options,
+												(_, index) =>
+													html`<span
+														>#${index + 1} ${de18ize(counts[index])} votes</span
+													>`
+											)}
 											<span>Borda Count ${de18ize(count)}</span>
 										</li>
 									`)(findHeadings(option))
