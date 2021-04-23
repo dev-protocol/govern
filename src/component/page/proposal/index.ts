@@ -46,7 +46,7 @@ export default (contractAddress: string): DirectiveFunction => {
 						text-decoration: none;
 					}
 					li {
-						padding: 1rem;
+						padding: 0.4rem;
 					}
 					main {
 						display: grid;
