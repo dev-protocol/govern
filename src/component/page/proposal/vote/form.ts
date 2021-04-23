@@ -35,7 +35,7 @@ export const form = (
 		step="1"
 	/>`
 	const h3 = (content: string): TemplateResult => html`<h3>${content}</h3>`
-	const isPlainText = attributes.optionsMimeType === 'text/plain' ? true : true
+	const isPlainText = attributes.optionsMimeType === 'text/plain'
 
 	return component(html`
 		<style>
