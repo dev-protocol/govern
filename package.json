@@ -54,7 +54,7 @@
 		"vite": "2.3.5"
 	},
 	"resolutions": {
-		"@ethersproject/bignumber": "5.2.0"
+		"@ethersproject/bignumber": "5.3.0"
 	},
 	"ava": {
 		"files": [
