@@ -17,8 +17,7 @@ import { BigNumber } from 'ethers'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
-	body:
-		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/proposal.md',
+	body: 'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/proposal.md',
 	options: [
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-1.md',
 		'https://raw.githubusercontent.com/dev-protocol/draft-proposals/main/proposals/example/option-2.md',

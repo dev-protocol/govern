@@ -25,35 +25,39 @@ const createStores = (
 	options: Attributes['options']
 ): readonly BehaviorSubject<UndefinedOr<number>>[] =>
 	options.map(() => new BehaviorSubject<UndefinedOr<number>>(U))
-const createOnVote = (
-	stores: readonly BehaviorSubject<UndefinedOr<number>>[],
-	err: BehaviorSubject<UndefinedOr<string>>
-): ((contract: Contract) => (ev: Event) => Promise<void>) => (
-	contract: Contract
-) => async (ev: Event): Promise<void> => {
-	ev.preventDefault()
-	const values = stores.map((s) => s.value || 0)
-	await send({ contract, args: [values] }).catch((error: Error) =>
-		err.next(error.message)
-	)
-}
-const createOnChange = (
-	stores: readonly BehaviorSubject<UndefinedOr<number>>[],
-	err: BehaviorSubject<UndefinedOr<string>>
-) => (index: number) => (ev: InputEvent) => {
-	stores[index].next(Number((ev.target as HTMLInputElement).value) || 0)
-	const values = stores.map((s) => s.value)
-	const total = calcTotal(values)
-	err.next(
-		values.includes(U)
-			? U
-			: total === 100
-			? values.every((v) => values.filter((w) => v === w).length === 1)
+const createOnVote =
+	(
+		stores: readonly BehaviorSubject<UndefinedOr<number>>[],
+		err: BehaviorSubject<UndefinedOr<string>>
+	): ((contract: Contract) => (ev: Event) => Promise<void>) =>
+	(contract: Contract) =>
+	async (ev: Event): Promise<void> => {
+		ev.preventDefault()
+		const values = stores.map((s) => s.value || 0)
+		await send({ contract, args: [values] }).catch((error: Error) =>
+			err.next(error.message)
+		)
+	}
+const createOnChange =
+	(
+		stores: readonly BehaviorSubject<UndefinedOr<number>>[],
+		err: BehaviorSubject<UndefinedOr<string>>
+	) =>
+	(index: number) =>
+	(ev: InputEvent) => {
+		stores[index].next(Number((ev.target as HTMLInputElement).value) || 0)
+		const values = stores.map((s) => s.value)
+		const total = calcTotal(values)
+		err.next(
+			values.includes(U)
 				? U
-				: ERR.NOT_UNIQUE
-			: ERR.NOT_100
-	)
-}
+				: total === 100
+				? values.every((v) => values.filter((w) => v === w).length === 1)
+					? U
+					: ERR.NOT_UNIQUE
+				: ERR.NOT_100
+		)
+	}
 
 export const vote = (
 	contractAddress: string,
