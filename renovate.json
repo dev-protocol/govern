@@ -1,4 +1,10 @@
 {
 	"extends": ["config:base"],
-	"automerge": true
+	"automerge": true,
+	"packageRules": [
+		{
+			"packageNames": ["@walletconnect/web3-provider"],
+			"allowedVersions": "<1.5.x"
+		}
+	]
 }
