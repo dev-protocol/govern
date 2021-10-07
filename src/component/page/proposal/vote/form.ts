@@ -1,7 +1,7 @@
 /* eslint-disable functional/no-return-void */
-import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html, TemplateResult } from 'lit-html'
-import { repeat } from 'lit-html/directives/repeat'
+import { shadow, subscribe } from '@aggre/ullr'
+import { html, TemplateResult } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
 import { BehaviorSubject } from 'rxjs'
 import { findHeadings } from '../../../../lib/parse-markdown'
 import { Attributes } from '../../../../lib/vote/attributes'
@@ -13,6 +13,7 @@ import { primaryButton, table } from '../../../../style/presets'
 import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
 import { markedHTML } from '../../../../lib/marked-html'
 import { U } from '../../../../lib/u'
+import { DirectiveResult } from 'lit-html/directive.js'
 
 type Props = {
 	readonly contractAddress: string
@@ -24,7 +25,7 @@ type Props = {
 export const form = (
 	{ contractAddress, onVoteFactory, onChangeFactory, attributes }: Props,
 	errorStore: BehaviorSubject<UndefinedOr<string>>
-): DirectiveFunction => {
+): DirectiveResult => {
 	const input = (i: number): TemplateResult => html`<input
 		@change=${onChangeFactory(i)}
 		type="number"
@@ -37,7 +38,7 @@ export const form = (
 	const h3 = (content: string): TemplateResult => html`<h3>${content}</h3>`
 	const isPlainText = attributes.optionsMimeType === 'text/plain'
 
-	return component(html`
+	return shadow(html`
 		<style>
 			form {
 				display: grid;

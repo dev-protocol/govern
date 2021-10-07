@@ -1,5 +1,5 @@
-import { html } from 'lit-html'
-import { repeat } from 'lit-html/directives/repeat'
+import { html } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
 import { contracts } from '../../../constant/contracts'
 import { asVar } from '../../../style/custom-properties'
 import { ul } from '../../../style/reset/ul'

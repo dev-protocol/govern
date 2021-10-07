@@ -1,13 +1,14 @@
-import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { shadow, subscribe } from '@aggre/ullr'
+import { html } from 'lit'
+import { DirectiveResult } from 'lit-html/directive.js'
 import { Attributes } from '../../../lib/vote/attributes'
 import { blockTimer } from '../../../store/block-timer'
 import { asVar } from '../../../style/custom-properties'
 import { a } from '../../common/a'
 import { asideContainer, asideHeading } from './styles'
 
-export const stats = (attributes: Attributes): DirectiveFunction => {
-	return component(html`
+export const stats = (attributes: Attributes): DirectiveResult => {
+	return shadow(html`
 		<style>
 			${asideHeading('header')} ${asideContainer('dl')} dl {
 				margin: 0;

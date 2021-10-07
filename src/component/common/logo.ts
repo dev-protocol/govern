@@ -1,4 +1,4 @@
-import { svg } from 'lit-html'
+import { svg } from 'lit'
 
 export const logo = svg`
 	<svg width="384" height="192" viewBox="0 0 384 192" fill="none" xmlns="http://www.w3.org/2000/svg">

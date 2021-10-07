@@ -1,5 +1,5 @@
-import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { shadow, subscribe } from '@aggre/ullr'
+import { html } from 'lit'
 import { from } from 'rxjs'
 import { attributes, parseAttributes } from '../../../lib/vote/attributes'
 import { createVoteContract } from '../../../lib/vote/create-vote-contract'
@@ -9,6 +9,7 @@ import { asVar } from '../../../style/custom-properties'
 import { standloneProvider } from '../../../lib/standalone-provider'
 import { placeholder } from '../../common/placeholder'
 import { BigNumber } from 'ethers'
+import { DirectiveResult } from 'lit-html/directive.js'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -24,8 +25,8 @@ const dummy = {
 	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
 }
 
-export const proposal = (contractAddress: string): DirectiveFunction =>
-	component(html` <style>
+export const proposal = (contractAddress: string): DirectiveResult =>
+	shadow(html` <style>
 			a {
 				color: ${asVar('primaryColor')};
 				text-decoration: none;

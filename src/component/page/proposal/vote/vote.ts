@@ -1,7 +1,7 @@
 /* eslint-disable functional/functional-parameters */
 /* eslint-disable functional/no-expression-statement */
-import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { shadow, subscribe } from '@aggre/ullr'
+import { html } from 'lit'
 import { BehaviorSubject } from 'rxjs'
 import { Attributes } from '../../../../lib/vote/attributes'
 import { asVar } from '../../../../style/custom-properties'
@@ -13,6 +13,7 @@ import { Contract } from 'ethers'
 import { vote as send } from '../../../../lib/vote/vote'
 import { connectOrConnected } from '../../../common/button/connect-or-connected'
 import { form } from './form'
+import { DirectiveResult } from 'lit-html/directive.js'
 
 const ERR = {
 	NOT_100: 'Please set the total value to 100',
@@ -62,12 +63,12 @@ const createOnChange =
 export const vote = (
 	contractAddress: string,
 	attributes: Attributes
-): DirectiveFunction => {
+): DirectiveResult => {
 	const stores = createStores(attributes.options)
 	const errStore = createErrorStore()
 	const onVoteFactory = createOnVote(stores, errStore)
 	const onChangeFactory = createOnChange(stores, errStore)
-	return component(html`
+	return shadow(html`
 		<style>
 			.err {
 				background: red;

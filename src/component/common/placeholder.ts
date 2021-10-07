@@ -1,14 +1,15 @@
-import { component, DirectiveFunction } from '@aggre/ullr'
-import { html } from 'lit-html'
-import { repeat } from 'lit-html/directives/repeat'
+import { shadow } from '@aggre/ullr'
+import { html } from 'lit'
+import { DirectiveResult } from 'lit-html/directive.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { asVar } from '../../style/custom-properties'
 
 type Props = {
 	readonly row?: number
 }
 
-export const placeholder = ({ row = 3 }: Props = {}): DirectiveFunction =>
-	component(html`
+export const placeholder = ({ row = 3 }: Props = {}): DirectiveResult =>
+	shadow(html`
 		<style>
 			div {
 				display: grid;

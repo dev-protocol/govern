@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 import { whenDefined } from '@devprotocol/util-ts'
-import { render } from 'lit-html'
+import { render } from 'lit'
 import page from './component/page'
 import { route } from './store/route'
 import { rootStyle } from './style/presets'

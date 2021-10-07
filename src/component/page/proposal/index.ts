@@ -1,5 +1,5 @@
-import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { shadow, subscribe } from '@aggre/ullr'
+import { html } from 'lit'
 import { from } from 'rxjs'
 import { attributes, parseAttributes } from '../../../lib/vote/attributes'
 import { createVoteContract } from '../../../lib/vote/create-vote-contract'
@@ -14,6 +14,7 @@ import { stats } from './stats'
 import { placeholder } from '../../common/placeholder'
 import { table } from '../../../style/presets'
 import { BigNumber } from 'ethers'
+import { DirectiveResult } from 'lit-html/directive.js'
 
 const dummy = {
 	subject: 'Governance Subject Governance Subject Governance Subject',
@@ -29,7 +30,7 @@ const dummy = {
 	proposer: '0x57E21bd98612DE0Bd1723F4bf81A944eF7BfF526',
 }
 
-export default (contractAddress: string): DirectiveFunction => {
+export default (contractAddress: string): DirectiveResult => {
 	const store = from(
 		attributes({
 			contract: createVoteContract(standloneProvider, contractAddress),
@@ -38,7 +39,7 @@ export default (contractAddress: string): DirectiveFunction => {
 			.then(parseAttributes)
 	)
 	return container(
-		component(
+		shadow(
 			html` <style>
 					a {
 						color: ${asVar('primaryColor')};
@@ -65,15 +66,17 @@ export default (contractAddress: string): DirectiveFunction => {
 					${table}
 				</style>
 				<main>
-					${subscribe(
-						store,
-						(attributes) =>
-							html`
-								<article>${markedHTML(attributes.body)}</article>
-								${vote(contractAddress, attributes)}
-							`,
-						placeholder({ row: 6 })
-					)}
+					<div>
+						${subscribe(
+							store,
+							(attributes) =>
+								html`
+									<article>${markedHTML(attributes.body)}</article>
+									${vote(contractAddress, attributes)}
+								`,
+							placeholder({ row: 6 })
+						)}
+					</div>
 					${subscribe(
 						store,
 						(attributes) =>

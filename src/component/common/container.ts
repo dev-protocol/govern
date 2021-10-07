@@ -1,11 +1,12 @@
-import { component, DirectiveFunction } from '@aggre/ullr'
-import { html, TemplateResult } from 'lit-html'
+import { shadow } from '@aggre/ullr'
+import { html, TemplateResult } from 'lit'
+import { DirectiveResult } from 'lit-html/directive.js'
 import { asVar } from '../../style/custom-properties'
 
 export const container = (
-	children: TemplateResult | DirectiveFunction
-): DirectiveFunction =>
-	component(html`
+	children: TemplateResult | DirectiveResult
+): DirectiveResult =>
+	shadow(html`
 		<style>
 			div {
 				max-width: ${asVar('containerWidth')};

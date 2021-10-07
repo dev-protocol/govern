@@ -1,6 +1,6 @@
-import { component, DirectiveFunction, subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
-import { repeat } from 'lit-html/directives/repeat'
+import { shadow, subscribe } from '@aggre/ullr'
+import { html } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
 import { from, zip } from 'rxjs'
 import { findHeadings } from '../../../lib/parse-markdown'
 import { Attributes } from '../../../lib/vote/attributes'
@@ -14,6 +14,7 @@ import { always, reverse } from 'ramda'
 import { standloneProvider } from '../../../lib/standalone-provider'
 import { placeholder } from '../../common/placeholder'
 import { blockTimer } from '../../../store/block-timer'
+import { DirectiveResult } from 'lit-html/directive.js'
 
 const BASIS = 10000
 const calcShare = (
@@ -37,8 +38,8 @@ const sort = (data: ReadonlyArray<VoteInfo>): ReadonlyArray<VoteInfo> =>
 export const results = (
 	contractAddress: string,
 	attrs: Attributes
-): DirectiveFunction =>
-	component(html`
+): DirectiveResult =>
+	shadow(html`
 		<style>
 			${ul} ${asideHeading('header')} ${asideContainer('header + div')} li {
 				display: grid;

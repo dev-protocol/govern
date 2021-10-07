@@ -1,5 +1,5 @@
-import { component } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { shadow } from '@aggre/ullr'
+import { html } from 'lit'
 import { asVar } from '../../style/custom-properties'
 import { ul } from '../../style/reset/ul'
 import { a } from './a'
@@ -7,7 +7,7 @@ import { container } from './container'
 import { logo } from './logo'
 
 export const footer = container(
-	component(html`
+	shadow(html`
 		<style>
 			${ul} footer {
 				display: grid;

@@ -1,10 +1,11 @@
-import { component, DirectiveFunction } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { shadow } from '@aggre/ullr'
+import { html } from 'lit'
+import { DirectiveResult } from 'lit-html/directive.js'
 import { connectWallet } from '../../../lib/connect-wallet'
 import { primaryButton } from '../../../style/presets'
 
-export const connect = (label: string): DirectiveFunction =>
-	component(html`
+export const connect = (label: string): DirectiveResult =>
+	shadow(html`
 		<style>
 			${primaryButton}
 		</style>

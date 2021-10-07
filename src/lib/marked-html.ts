@@ -1,6 +1,6 @@
 import markdownIt from 'markdown-it'
-import { html, TemplateResult } from 'lit-html'
-import { unsafeHTML } from 'lit-html/directives/unsafe-html'
+import { html, TemplateResult } from 'lit'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 const parse = markdownIt({
 	html: true,

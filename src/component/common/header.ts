@@ -1,5 +1,5 @@
 import { subscribe } from '@aggre/ullr'
-import { html } from 'lit-html'
+import { html } from 'lit'
 import { always } from 'ramda'
 import { provider } from '../../store/provider'
 import { asVar } from '../../style/custom-properties'
