@@ -6,7 +6,7 @@ import { route } from './store/route'
 import { rootStyle } from './style/presets'
 
 whenDefined(document.head.querySelector('style#style_app'), (el) =>
-	render(rootStyle, el)
+	render(rootStyle, el as HTMLStyleElement)
 )
 whenDefined(document.getElementById('app'), (el) => render(page, el))
 
