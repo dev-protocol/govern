@@ -31,7 +31,7 @@
 		"web3modal": "1.9.4"
 	},
 	"devDependencies": {
-		"@ava/typescript": "1.1.1",
+		"@ava/typescript": "2.0.0",
 		"@types/dotenv": "8.2.0",
 		"@types/markdown-it": "12.2.3",
 		"@types/node": "16.11.6",
