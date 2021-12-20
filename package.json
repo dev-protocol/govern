@@ -34,7 +34,7 @@
 		"@ava/typescript": "1.1.1",
 		"@types/dotenv": "8.2.0",
 		"@types/markdown-it": "12.2.3",
-		"@types/node": "16.11.14",
+		"@types/node": "16.11.15",
 		"@types/ramda": "0.27.60",
 		"@types/sinon": "10.0.6",
 		"@typescript-eslint/eslint-plugin": "5.8.0",
