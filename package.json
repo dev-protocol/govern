@@ -27,7 +27,7 @@
 		"lit": "2.0.2",
 		"markdown-it": "12.3.0",
 		"ramda": "0.27.1",
-		"rxjs": "7.5.0",
+		"rxjs": "7.5.1",
 		"web3modal": "1.9.4"
 	},
 	"devDependencies": {
