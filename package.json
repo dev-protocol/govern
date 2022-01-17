@@ -41,7 +41,7 @@
 		"@typescript-eslint/parser": "5.10.0",
 		"ava": "4.0.1",
 		"browser-env": "3.3.0",
-		"dotenv": "14.1.0",
+		"dotenv": "14.2.0",
 		"eslint": "7.32.0",
 		"eslint-config-prettier": "8.3.0",
 		"eslint-plugin-functional": "3.7.2",
