@@ -18,7 +18,7 @@
 	"author": "",
 	"license": "MPL-2.0",
 	"dependencies": {
-		"@aggre/ullr": "2.0.1",
+		"@aggre/ullr": "2.1.1",
 		"@devprotocol/util-ts": "2.2.1",
 		"@devprotocol/vote-count-resolver": "0.2.0",
 		"@metamask/detect-provider": "1.2.0",
