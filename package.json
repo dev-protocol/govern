@@ -28,7 +28,7 @@
 		"markdown-it": "12.3.2",
 		"ramda": "0.28.0",
 		"rxjs": "7.5.5",
-		"web3modal": "1.9.5"
+		"web3modal": "1.9.12"
 	},
 	"devDependencies": {
 		"@ava/typescript": "3.0.1",
